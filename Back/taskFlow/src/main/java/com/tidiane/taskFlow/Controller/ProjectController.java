@@ -10,13 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.tidiane.taskFlow.DTO.ProjectResponseDTO;
 import com.tidiane.taskFlow.Model.Project;
 import com.tidiane.taskFlow.Repository.ProjectRepository;
+import com.tidiane.taskFlow.Service.JwtService;
+import com.tidiane.taskFlow.Service.ProjectService;
 
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
     @Autowired private ProjectRepository projectRepository;
+    @Autowired private JwtService jwtService;
+    @Autowired private ProjectService projectService;
 
     @PostMapping
     public Project addProject(@RequestBody Project project){
@@ -31,5 +37,11 @@ public class ProjectController {
     @GetMapping("/{id}")
     public Optional<Project> getProject(@PathVariable Long id){
         return projectRepository.findById(id);
+    }
+
+    @GetMapping("/my-projects")
+    public List<ProjectResponseDTO> getMyProjects() {
+        Long userId = jwtService.getConnectedUserId();
+        return projectService.getUserConnectedProjects();
     }
 }

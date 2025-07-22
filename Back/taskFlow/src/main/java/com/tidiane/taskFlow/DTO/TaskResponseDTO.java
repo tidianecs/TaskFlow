@@ -1,12 +1,15 @@
 package com.tidiane.taskFlow.DTO;
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+
 
 public class TaskResponseDTO {
-    private String content;
-    private String status;
-    private String projectName;
-    private String userName;
+    @NotBlank private String content;
+    @NotBlank private String status;
+    @NotBlank private String projectName;
+    @NotBlank private String userName;
+    /*I will make NotNull for all the date*/
     private LocalDate dueDate;
     private LocalDate createdAt = LocalDate.now();
     

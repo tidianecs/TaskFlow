@@ -1,9 +1,8 @@
 package com.tidiane.taskFlow.Repository;
-
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.tidiane.taskFlow.Model.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    
+    List<Task> findByUserName(String username);
 }

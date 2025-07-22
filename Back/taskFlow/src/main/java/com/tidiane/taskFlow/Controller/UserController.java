@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tidiane.taskFlow.Model.User;
 import com.tidiane.taskFlow.Repository.UserRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired private UserRepository userRepository;
 
     @PostMapping
-    public User addUser(@RequestBody User user){
+    public User addUser(@Valid @RequestBody User user){
         return userRepository.save(user);
     }
 

@@ -3,29 +3,32 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tidiane.taskFlow.DTO.TaskProjectDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Project {
     @Id @GeneratedValue private Long projectId;
-    private String projectName;
+    @NotBlank private String projectName;
     private String projectDesc;
     @OneToMany(mappedBy="assignProject", cascade = CascadeType.ALL) @JsonIgnore private List<Task> tasks; 
-    private Long ownerId;
+    @ManyToOne @JoinColumn(name = "owner_id") private User owner;
     private LocalDate createdAt = LocalDate.now();
 
     //empty constructor for jpa
     public Project(){}
 
-    public Project(String projectName, String projectDesc, Long ownerId){
+    public Project(String projectName, String projectDesc){
         this.projectName = projectName;
         this.projectDesc = projectDesc;
-        this.ownerId = ownerId;
     }
 
     public Long getProjectId(){
@@ -56,10 +59,11 @@ public class Project {
         this.tasks = tasks;
     }
 
-    public Long getProjectOwnerId(){
-        return ownerId;
+    public User getOwner() {
+        return owner;
     }
-    public void setProjectOwnerId(Long ownerId){
-        this.ownerId = ownerId;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
+
 }

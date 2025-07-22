@@ -17,6 +17,8 @@ import com.tidiane.taskFlow.Model.Task;
 import com.tidiane.taskFlow.Repository.TaskRepository;
 import com.tidiane.taskFlow.Service.TaskService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/task")
 public class TaskController {
@@ -24,7 +26,7 @@ public class TaskController {
     @Autowired private TaskService taskService;
 
     @PostMapping
-    public ResponseEntity<TaskResponseDTO> addTask(@RequestBody TaskDTO task){
+    public ResponseEntity<TaskResponseDTO> addTask(@Valid @RequestBody TaskDTO task){
         TaskResponseDTO savedTask = taskService.createTaskFromDTO(task);
         return ResponseEntity.ok(savedTask);
     }
@@ -37,5 +39,10 @@ public class TaskController {
     @GetMapping("/{id}")
     public Optional<Task> getTask(@PathVariable Long id){
         return taskRepository.findById(id);
+    }
+
+    @GetMapping("/my-tasks")
+    public List<TaskResponseDTO> getUserConnectedTasks(){
+        return taskService.getUserConnectedTasks();
     }
 }
