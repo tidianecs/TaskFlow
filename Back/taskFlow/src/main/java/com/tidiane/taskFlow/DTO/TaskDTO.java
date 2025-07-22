@@ -1,5 +1,8 @@
 package com.tidiane.taskFlow.DTO;
 import java.time.LocalDate;
+
+import com.tidiane.taskFlow.Model.TaskStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -8,7 +11,7 @@ import jakarta.persistence.Id;
 public class TaskDTO {
     @Id @GeneratedValue Long taskId;
     private String content;
-    private String status;
+    private TaskStatus status;
     private Long projectId;
     private Long userId;
     private LocalDate dueDate;
@@ -28,10 +31,10 @@ public class TaskDTO {
         this.content = content;
     }
 
-    public String getStatus(){
+    public TaskStatus getStatus(){
         return status;
     }
-    public void setStatus(String status){
+    public void setStatus(TaskStatus status){
         this.status = status;
     }
 

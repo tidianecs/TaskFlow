@@ -29,7 +29,7 @@ public class SecurityConfig {
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200", "http://127.0.0.1:4200"));
         
         //Allows methods
-        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE"));
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "PUT"));
         
         //Allows full accces for the header
         corsConfiguration.setAllowedHeaders(Arrays.asList("*"));

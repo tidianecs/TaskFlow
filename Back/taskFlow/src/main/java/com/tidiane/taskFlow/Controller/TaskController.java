@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,12 @@ public class TaskController {
     @GetMapping("/{id}")
     public Optional<Task> getTask(@PathVariable Long id){
         return taskRepository.findById(id);
+    }
+
+    @PutMapping("/{id}/done")
+    public ResponseEntity<String> asDone(@PathVariable Long id){
+        taskService.markTaskAsDone(id);
+        return ResponseEntity.ok("Task marked as DONE.");
     }
 
     @GetMapping("/my-tasks")

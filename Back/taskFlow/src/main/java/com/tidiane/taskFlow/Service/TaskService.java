@@ -1,14 +1,14 @@
 package com.tidiane.taskFlow.Service;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.tidiane.taskFlow.DTO.TaskDTO;
 import com.tidiane.taskFlow.DTO.TaskResponseDTO;
 import com.tidiane.taskFlow.Model.Project;
 import com.tidiane.taskFlow.Model.Task;
+import com.tidiane.taskFlow.Model.TaskStatus;
 import com.tidiane.taskFlow.Model.User;
 import com.tidiane.taskFlow.Repository.ProjectRepository;
 import com.tidiane.taskFlow.Repository.TaskRepository;
@@ -52,6 +52,13 @@ public class TaskService {
                 task.getDueDate(),
                 task.getCreatedAT()
         )).toList();
+    }
+
+    public void markTaskAsDone(Long id){
+        Task task = taskRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("This task not found"));
+        task.setStatus(TaskStatus.DONE);
+        taskRepository.save(task);
     }
 
 }
