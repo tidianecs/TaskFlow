@@ -3,6 +3,7 @@ package com.tidiane.taskFlow.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.tidiane.taskFlow.DTO.ProjectResponseDTO;
 import com.tidiane.taskFlow.DTO.TaskResponseDTO;
@@ -12,6 +13,7 @@ import com.tidiane.taskFlow.Model.User;
 import com.tidiane.taskFlow.Repository.ProjectRepository;
 import com.tidiane.taskFlow.Repository.UserRepository;
 
+@Service
 public class ProjectService {
         @Autowired private UserRepository userRepository;
         @Autowired private JwtService jwtService;
@@ -27,7 +29,6 @@ public class ProjectService {
         projectSave.setProjectName(project.getProjectName());
         projectSave.setProjectDesc(project.getProjectDesc());
         projectSave.setTasks(project.getTasks());
-        projectSave.setProjectName(null);
 
         Project saved = projectRepository.save(projectSave);
 
@@ -36,7 +37,7 @@ public class ProjectService {
 
     public List<ProjectResponseDTO> getUserConnectedProjects(){
         Long userId = JwtService.getConnectedUserId();
-        List<Project> projects = projectRepository.findByUserId(userId);
+        List<Project> projects = projectRepository.findByOwner_UserId(userId);
 
         return projects.stream().map(project -> new ProjectResponseDTO(
                 project.getProjectId(),

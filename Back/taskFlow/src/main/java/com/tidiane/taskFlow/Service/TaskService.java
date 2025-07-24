@@ -42,7 +42,7 @@ public class TaskService {
 
     public List<TaskResponseDTO> getUserConnectedTasks(){
         String username = JwtService.getConnectedUsername();
-        List<Task> tasks = taskRepository.findByUserName(username);
+        List<Task> tasks = taskRepository.findByAssignUserUserName(username);
 
         return tasks.stream().map(task -> new TaskResponseDTO(
                 task.getContent(),

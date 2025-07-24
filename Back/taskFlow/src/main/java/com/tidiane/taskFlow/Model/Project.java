@@ -1,10 +1,8 @@
 package com.tidiane.taskFlow.Model;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tidiane.taskFlow.DTO.TaskProjectDTO;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,16 +10,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Project {
     @Id @GeneratedValue private Long projectId;
-    @NotBlank private String projectName;
+    private String projectName;
     private String projectDesc;
     @OneToMany(mappedBy="assignProject", cascade = CascadeType.ALL) @JsonIgnore private List<Task> tasks; 
     @ManyToOne @JoinColumn(name = "owner_id") private User owner;
-    private LocalDate createdAt = LocalDate.now();
+    private LocalDateTime createdAt;
 
     //empty constructor for jpa
     public Project(){}
@@ -34,7 +31,7 @@ public class Project {
     public Long getProjectId(){
         return projectId;
     }
-    public LocalDate getCreatedAT(){
+    public LocalDateTime getCreatedAT(){
         return createdAt;
     }
 

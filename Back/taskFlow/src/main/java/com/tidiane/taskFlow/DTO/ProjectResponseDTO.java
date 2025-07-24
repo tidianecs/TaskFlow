@@ -1,11 +1,11 @@
 package com.tidiane.taskFlow.DTO;
 import java.util.List;
-
 import com.tidiane.taskFlow.Model.Task;
+import jakarta.validation.constraints.NotBlank;
 
 public class ProjectResponseDTO {
     private Long projectId;
-    private String projectName;
+    @NotBlank private String projectName;
     private String projectDesc;
     private String userName;
     private List<Task> tasks;

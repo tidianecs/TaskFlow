@@ -9,6 +9,7 @@ import com.tidiane.taskFlow.Model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByUserName(String connectedUsername);
+    Optional<User> findByUserName(String userName);
+
     
 }

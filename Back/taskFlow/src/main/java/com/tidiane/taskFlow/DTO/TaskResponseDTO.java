@@ -1,5 +1,5 @@
 package com.tidiane.taskFlow.DTO;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import com.tidiane.taskFlow.Model.TaskStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,10 +11,10 @@ public class TaskResponseDTO {
     @NotBlank private String projectName;
     @NotBlank private String userName;
     /*I will make NotNull for all the date*/
-    private LocalDate dueDate;
-    private LocalDate createdAt = LocalDate.now();
+    private LocalDateTime dueDate;
+    private LocalDateTime createdAt;
     
-    public TaskResponseDTO(String content, TaskStatus status, String projectName, String userName, LocalDate dueDate, LocalDate createdAt) {
+    public TaskResponseDTO(String content, TaskStatus status, String projectName, String userName, LocalDateTime dueDate, LocalDateTime createdAt) {
         this.content = content;
         this.status = status;
         this.projectName = projectName;
@@ -23,7 +23,7 @@ public class TaskResponseDTO {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getCreatedAT(){
+    public LocalDateTime getCreatedAT(){
         return createdAt;
     }
 
@@ -55,10 +55,10 @@ public class TaskResponseDTO {
         this.userName = userName;
     }
 
-    public LocalDate getDueDate(){
+    public LocalDateTime getDueDate(){
         return dueDate;
     }
-    public void setDueDate(LocalDate dueDate){
+    public void setDueDate(LocalDateTime dueDate){
         this.dueDate = dueDate;
     }
 }

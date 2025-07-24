@@ -1,26 +1,20 @@
 package com.tidiane.taskFlow.DTO;
-import java.time.LocalDate;
-
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import com.tidiane.taskFlow.Model.TaskStatus;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
-@Entity
-public class TaskDTO {
-    @Id @GeneratedValue Long taskId;
+public class TaskDTO implements Serializable{
     private String content;
     private TaskStatus status;
     private Long projectId;
     private Long userId;
-    private LocalDate dueDate;
-    private LocalDate createdAt = LocalDate.now();
+    private LocalDateTime dueDate;
+    private LocalDateTime createdAt;
 
     //Empty constructor for jpa
     public TaskDTO(){}
 
-    public LocalDate getCreatedAT(){
+    public LocalDateTime getCreatedAT(){
         return createdAt;
     }
 
@@ -52,10 +46,10 @@ public class TaskDTO {
         this.userId = userId;
     }
 
-    public LocalDate getDueDate(){
+    public LocalDateTime getDueDate(){
         return dueDate;
     }
-    public void setDueDate(LocalDate dueDate){
+    public void setDueDate(LocalDateTime dueDate){
         this.dueDate = dueDate;
     }
 }
