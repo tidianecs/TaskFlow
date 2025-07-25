@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,10 +48,25 @@ public class TaskController {
         return taskRepository.findById(id);
     }
 
-    @PutMapping("/{id}/done")
+    @PutMapping("/{id}")
     public ResponseEntity<String> asDone(@PathVariable Long id){
         taskService.markTaskAsDone(id);
         return ResponseEntity.ok("Task marked as DONE.");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
+        taskService.deleteTask(id);
+        return ResponseEntity.ok("Task deleted successfully.");
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Task> getTasksByUser(@PathVariable String userId) {
+        String connectedUserId = jwtService.getConnectedUserId();
+        if (!connectedUserId.equals(userId)) {
+            throw new RuntimeException("Access denied: not your tasks");
+        }
+        return taskRepository.findByAssignUserUserName(userId);
     }
 
     @GetMapping("/project/{projectId}")

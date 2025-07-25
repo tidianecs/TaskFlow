@@ -1,12 +1,12 @@
 package com.tidiane.taskFlow.DTO;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TaskProjectDTO {
     private String content;
     private String status;
-    private LocalDate dueDate;
+    private LocalDateTime dueDate;
 
-    public TaskProjectDTO(String content, String status, LocalDate dueDate) {
+    public TaskProjectDTO(String content, String status, LocalDateTime dueDate) {
         this.content = content;
         this.status = status;
         this.dueDate = dueDate;
@@ -28,11 +28,11 @@ public class TaskProjectDTO {
         this.status = status;
     }
 
-    public LocalDate getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 }

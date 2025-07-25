@@ -10,7 +10,7 @@
   </div>
 
   <div *ngIf="projects.length > 0; else noProjects" class="flex flex-wrap gap-4 w-auto h-auto">
-    <div *ngFor="let project of projects" class="group bg-stone-800 text-white cursor-pointer p-4 rounded h-auto w-1/4 shadow flex justify-between items-center hover:shadow-2xl hover:shadow-slate-900 ease-out duration-300" (click)="goToProjectTasks(project.projectId)">
+    <div *ngFor="let project of projects" class="group bg-stone-800 text-white cursor-pointer p-4 rounded h-auto w-1/4 shadow flex justify-between items-center hover:shadow-2xl hover:shadow-slate-900 hover:rounded-lg ease-out duration-300" (click)="goToProjectTasks(project.projectId)">
       <div>
         <h3 class="text-xl font-bold">{{ project.projectName }}</h3>
         <p class="text-sm">{{ project.projectDesc }}</p>
