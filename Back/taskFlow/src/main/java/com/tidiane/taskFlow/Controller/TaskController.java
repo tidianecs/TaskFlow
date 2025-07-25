@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tidiane.taskFlow.DTO.TaskDTO;
 import com.tidiane.taskFlow.DTO.TaskResponseDTO;
+import com.tidiane.taskFlow.Model.Project;
 import com.tidiane.taskFlow.Model.Task;
+import com.tidiane.taskFlow.Repository.ProjectRepository;
 import com.tidiane.taskFlow.Repository.TaskRepository;
+import com.tidiane.taskFlow.Service.JwtService;
 import com.tidiane.taskFlow.Service.TaskService;
 
 import jakarta.validation.Valid;
@@ -25,6 +28,8 @@ import jakarta.validation.Valid;
 public class TaskController {
     @Autowired private TaskRepository taskRepository;
     @Autowired private TaskService taskService;
+    @Autowired private JwtService jwtService;
+    @Autowired private ProjectRepository projectRepository;
 
     @PostMapping
     public ResponseEntity<TaskResponseDTO> addTask(@Valid @RequestBody TaskDTO task){
@@ -48,8 +53,17 @@ public class TaskController {
         return ResponseEntity.ok("Task marked as DONE.");
     }
 
-    @GetMapping("/my-tasks")
-    public List<TaskResponseDTO> getUserConnectedTasks(){
-        return taskService.getUserConnectedTasks();
+    @GetMapping("/project/{projectId}")
+    public List<Task> getTasksByProject(@PathVariable Long projectId) {
+        String userId = jwtService.getConnectedUserId();
+        Project project = projectRepository.findById(projectId)
+            .orElseThrow(() -> new RuntimeException("Project not found"));
+        
+        if (!project.getOwner().getUserId().equals(userId)) {
+            throw new RuntimeException("Access denied: not your project");
+        }
+
+        return taskRepository.findByAssignProject_ProjectId(projectId);
     }
+
 }

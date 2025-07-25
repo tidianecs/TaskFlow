@@ -8,6 +8,8 @@ import { ProjectsDashboardComponent } from './layouts/projects-dashboard/project
 import { KeycloakService } from './service/keycloak.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { TasksDashboardComponent } from './layouts/tasks-dashboard/tasks-dashboard.component';
+import { CommonModule, DatePipe } from '@angular/common';
 
 export function kcFactory(kcService: KeycloakService){
   return () => kcService.init();
@@ -18,13 +20,15 @@ export function kcFactory(kcService: KeycloakService){
     AppComponent,
     HomepageComponent,
     NavbarComponent,
-    ProjectsDashboardComponent
+    ProjectsDashboardComponent,
+    TasksDashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   providers: [
     {
