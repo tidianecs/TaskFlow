@@ -1,5 +1,5 @@
 export interface Project {
-    projectId?: number;
+    projectId?: number | undefined;
     projectName: string;
     projectDesc: string;
     createdAt?: string;

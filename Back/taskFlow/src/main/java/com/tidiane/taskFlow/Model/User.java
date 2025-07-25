@@ -1,13 +1,13 @@
 package com.tidiane.taskFlow.Model;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class User {
-    @Id @GeneratedValue private Long userId;
+    @Id @Column(length = 36) private String userId;
     @NotBlank(message = "The user name is mandatory!") private String userName;
     @Email(message = "Put a correct email format!") private String userEmail;
 
@@ -19,8 +19,12 @@ public class User {
         this.userEmail = userEmail;
     }
 
-    public Long getUserId(){
+    public String getUserId(){
         return userId;
+    }
+
+    public void setUserId(String userId){
+        this.userId = userId;
     }
 
     public String getUserName(){

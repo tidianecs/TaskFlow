@@ -6,6 +6,8 @@ import { HomepageComponent } from './layouts/homepage/homepage.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { ProjectsDashboardComponent } from './layouts/projects-dashboard/projects-dashboard.component';
 import { KeycloakService } from './service/keycloak.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 export function kcFactory(kcService: KeycloakService){
   return () => kcService.init();
@@ -20,7 +22,9 @@ export function kcFactory(kcService: KeycloakService){
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     {

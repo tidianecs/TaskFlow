@@ -22,7 +22,7 @@ public class TaskService {
     @Autowired private JwtService jwtService;
 
     public TaskResponseDTO createTaskFromDTO(TaskDTO taskDto){
-        Project project = projectRepository.findById(taskDto.getProjectId())
+        Project project = projectRepository.findByProjectId(taskDto.getProjectId())
                         .orElseThrow(() -> new RuntimeException("This project not found"));
         User user = userRepository.findByUserName(jwtService.getConnectedUsername())
                         .orElseThrow(() -> new RuntimeException("This user not found"));

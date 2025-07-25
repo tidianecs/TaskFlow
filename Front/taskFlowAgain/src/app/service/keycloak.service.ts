@@ -38,12 +38,16 @@ export class KeycloakService {
       this.profile = (await this.keycloak?.loadUserProfile()) as UserProfile;
       this.profile.token = this.keycloak?.token;
 
-      //console.log("Token récupéré :", this.keycloak.token);
+      console.log("Token récupéré :", this.keycloak.token);
     }
   }
 
   isAuthenticated(): boolean {
     return !!this.kc?.authenticated;
+  }
+
+  getUserId(): string | undefined {
+    return this.keycloak?.subject;
   }
 
 

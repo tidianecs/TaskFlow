@@ -1,5 +1,4 @@
 package com.tidiane.taskFlow.Model;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,6 +29,10 @@ public class Project {
 
     public Long getProjectId(){
         return projectId;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt){
+        this.createdAt = createdAt;
     }
     public LocalDateTime getCreatedAT(){
         return createdAt;

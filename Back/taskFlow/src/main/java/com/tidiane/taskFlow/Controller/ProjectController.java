@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,9 +26,10 @@ public class ProjectController {
     @Autowired private ProjectService projectService;
 
     @PostMapping
-    public Project addProject(@RequestBody Project project){
-        return projectRepository.save(project);
+    public ProjectResponseDTO addProject(@RequestBody ProjectResponseDTO projectDto) {
+        return projectService.createProject(projectDto);
     }
+
 
     @GetMapping("/all")
     public List<Project> getProjects(){
@@ -36,12 +38,17 @@ public class ProjectController {
 
     @GetMapping("/{id}")
     public Optional<Project> getProject(@PathVariable Long id){
-        return projectRepository.findById(id);
+        return projectRepository.findByProjectId(id);
     }
 
     @GetMapping("/my-projects")
     public List<ProjectResponseDTO> getMyProjects() {
-        Long userId = jwtService.getConnectedUserId();
-        return projectService.getUserConnectedProjects();
+        String userId = JwtService.getConnectedUserId();
+        return projectService.getUserConnectedProjects(userId);
+    }
+
+    @DeleteMapping("/{projectId}")
+    public void delProject(@PathVariable Long projectId){
+        projectRepository.deleteById(projectId);
     }
 }
