@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 
 public class TaskResponseDTO {
+    private Long taskId;
     @NotBlank private String content;
     @NotNull private TaskStatus status;
     @NotBlank private String projectName;
@@ -14,7 +15,8 @@ public class TaskResponseDTO {
     private LocalDateTime dueDate;
     private LocalDateTime createdAt;
     
-    public TaskResponseDTO(String content, TaskStatus status, String projectName, String userName, LocalDateTime dueDate, LocalDateTime createdAt) {
+    public TaskResponseDTO(Long taskId, String content, TaskStatus status, String projectName, String userName, LocalDateTime dueDate, LocalDateTime createdAt) {
+        this.taskId = taskId;
         this.content = content;
         this.status = status;
         this.projectName = projectName;
@@ -25,6 +27,13 @@ public class TaskResponseDTO {
 
     public LocalDateTime getCreatedAT(){
         return createdAt;
+    }
+
+    public Long getTaskId() {
+        return taskId;
+    }
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
 
     public String getContent(){

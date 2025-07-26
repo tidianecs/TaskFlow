@@ -67,7 +67,7 @@ export class TasksDashboardComponent implements OnInit {
         status: 'IN_GOING',
         projectId: +projectId
       };
-
+      console.log(this.newTaskDueDate);
       this.taskService.addTask(newTask).subscribe({
         next: (createdTask: Task) => {
           this.inProgressTasks.unshift(createdTask);

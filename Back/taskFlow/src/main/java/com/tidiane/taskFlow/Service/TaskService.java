@@ -36,7 +36,7 @@ public class TaskService {
 
         Task saveTask = taskRepository.save(task);
 
-        return new TaskResponseDTO(saveTask.getContent(), saveTask.getStatus(), project.getProjectName(), user.getUserName(), saveTask.getDueDate(), saveTask.getCreatedAT());
+        return new TaskResponseDTO(saveTask.getTaskId(), saveTask.getContent(), saveTask.getStatus(), project.getProjectName(), user.getUserName(), saveTask.getDueDate(), saveTask.getCreatedAT());
         
     }
 
@@ -45,6 +45,7 @@ public class TaskService {
         List<Task> tasks = taskRepository.findByAssignUserUserName(username);
 
         return tasks.stream().map(task -> new TaskResponseDTO(
+                task.getTaskId(),
                 task.getContent(),
                 task.getStatus(),
                 task.getProject().getProjectName(),
