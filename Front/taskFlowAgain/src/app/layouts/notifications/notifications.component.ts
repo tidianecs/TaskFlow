@@ -18,10 +18,10 @@ export class NotificationsComponent implements OnInit {
     this.loadNotifications();
 
     // reload every 30s
-    setInterval(() => {
+    /*setInterval(() => {
       this.loadNotifications();
     }, 30000);
-
+*/ 
   }
 
   loadNotifications(): void {

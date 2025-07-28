@@ -6,7 +6,7 @@
     <p>({{notifications.length}})</p>
 </div>
 
-<div *ngIf="notifications.length > 0 && notifView" class="fixed bottom-4 right-4 bg-stone-800 p-4 rounded shadow-lg w-72">
+<div *ngIf="notifications.length > 0 && notifView" class="fixed bottom-4 right-4 bg-stone-800 p-4 rounded shadow-lg w-64">
     <div class="font-bold text-lg mb-2 text-stone-300 flex justify-between">
         <h3>Task to do for today :</h3>
         <p (click)="hideNotificationsBubble()" class="bg-stone-700 w-8 text-center rounded-lg cursor-pointer">-</p>
