@@ -82,4 +82,9 @@ public class TaskController {
         return taskRepository.findByAssignProject_ProjectId(projectId);
     }
 
+    @GetMapping("/due-today")
+    public List<Task> getDueTodayTasks() {
+        return taskService.getDueTodayTasks();
+    }
+
 }

@@ -14,11 +14,7 @@ export class TasksDashboardComponent implements OnInit {
   newTaskContent: string = '';
   newTaskDueDate: string = ''; 
 
-  constructor(
-    private route: ActivatedRoute,
-    private taskService: TaskService,
-    private keycloakService: KeycloakService
-  ) {}
+  constructor(private route: ActivatedRoute, private taskService: TaskService, private keycloakService: KeycloakService) {}
 
   ngOnInit(): void {
     const projectId = this.route.snapshot.paramMap.get('projectId');

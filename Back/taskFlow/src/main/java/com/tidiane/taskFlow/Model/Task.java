@@ -18,7 +18,7 @@ public class Task {
     @Enumerated(EnumType.STRING) private TaskStatus status = TaskStatus.IN_GOING;
     @ManyToOne @JoinColumn(name = "projectId") private Project assignProject;
     @ManyToOne @JoinColumn(name = "userId") private User assignUser;
-    @UpdateTimestamp private LocalDateTime dueDate;
+    private LocalDateTime dueDate;
     @CreationTimestamp private LocalDateTime createdAt;
 
     // Empty constructor for JPA

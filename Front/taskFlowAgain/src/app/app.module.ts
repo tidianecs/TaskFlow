@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TasksDashboardComponent } from './layouts/tasks-dashboard/tasks-dashboard.component';
 import { CommonModule, DatePipe } from '@angular/common';
+import { NotificationsComponent } from './layouts/notifications/notifications.component';
 
 export function kcFactory(kcService: KeycloakService){
   return () => kcService.init();
@@ -21,7 +22,8 @@ export function kcFactory(kcService: KeycloakService){
     HomepageComponent,
     NavbarComponent,
     ProjectsDashboardComponent,
-    TasksDashboardComponent
+    TasksDashboardComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,

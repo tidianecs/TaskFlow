@@ -1,4 +1,6 @@
 package com.tidiane.taskFlow.Service;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,5 +70,12 @@ public class TaskService {
         taskRepository.delete(task);
     }
 
+    public List<Task> getDueTodayTasks() {
+        String userId = jwtService.getConnectedUserId();
 
+        LocalDateTime startOfDay = LocalDate.now().atStartOfDay();
+        LocalDateTime endOfDay = startOfDay.plusDays(1).minusSeconds(1);
+
+        return taskRepository.findByAssignUser_UserIdAndStatusAndDueDateBetween(userId, TaskStatus.IN_GOING, startOfDay, endOfDay);
+    }
 }

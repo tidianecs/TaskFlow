@@ -50,6 +50,10 @@ export class KeycloakService {
     return this.keycloak?.subject;
   }
 
+  getToken(): string | undefined{
+    return this.keycloak?.token;
+  }
+
 
   login(){
     return this.keycloak?.login();
